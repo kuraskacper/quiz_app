@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Kacper Kuraś">
+    <meta name="keywords" content="quiz online, quiz, testy wiedzy, rozwiązywanie quizów, quiz uczen, quiz nauczyciel, quiz gigaportal">
+    <meta name="description" content="Gigaportal do rozwiązywania quizów przez uczniów">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <script defer src="{{ url_for('static', filename='main.js') }}"></script>
+    {% block head %} {% endblock %}
+</head>
+<body>
+    <nav class="topnav" id="topnav">
+        {% if not user.is_authenticated %}
+            <a href="/login" >Zaloguj się</a>
+            <a href="/sing-up" >Zarejestruj się</a>
+        {% endif %}
+        {% if user.role == 'student' or user.role == 'admin' %}
+            <a href="/enter-quiz-code" >Rozpocznij quiz</a>
+            <a href="/results" >Zobacz wyniki</a>
+        {% endif %}
+        {% if user.role == 'teacher' or user.role == 'admin' %}
+            <a href="/create-quiz" >Stwórz quiz</a>
+            <a href="/quizzes" >Twoje quizy</a>
+            <a href="/students-results" >Wyniki uczniów</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <a href="/logout" style="float: right">Wyloguj</a>
+        {% endif %}
+        <a href="javascript:void(0);" class="icon" onclick="toggleNav()">
+            <p>&#9776;</p>
+        </a>
+    </nav>
+
+    {% with messages = get_flashed_messages (with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'error' %}
+                    <div class="error-message flash-message">
+                {% else %}
+                    <div  class="success-message flash-message">
+                {% endif%}
+                {{ message }}
+                <span class='close-message' onclick="closeMessage(this)">&times;</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+
+</body>
+</html>

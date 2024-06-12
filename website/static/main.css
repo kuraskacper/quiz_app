@@ -1,0 +1,332 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    margin: 0;
+    font-family: Verdana;
+    background-color: var(--a);
+}
+
+header{
+    width: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px auto
+}
+
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: sticky;
+  top: 0;
+}
+
+
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  border-radius: 15px;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+:root{
+    --main-width: 60%;
+}
+
+@media (max-width: 600px) {
+    :root {
+        --main-width: 85%;
+    }
+    .topnav a {display: none;}
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+    .topnav.responsive {position: sticky; top: 0;}
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none  !important;
+        display: block;
+        text-align: left;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    :root {
+        --main-width: 70%;
+    }
+}
+
+@media (min-width: 900px) {
+    :root {
+        --main-width: 50%;
+    }
+}
+
+.flash-message{
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+
+}
+
+.close-message{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 28px;
+
+
+}
+
+.error-message{
+    background-color: #f2dede;
+    color: #d8000c;
+}
+
+.success-message{
+    background-color: #dff0d8;
+    color: #4f8a10;
+}
+
+.content{
+    padding: 10px;
+}
+
+.items-group{
+    display: flex-block;
+    justify-content: center;
+}
+
+.item{
+    width: var(--main-width);
+    margin: 20px auto;
+}
+
+.input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-top: 8px;
+    border: 2px solid #ccc;
+    outline: 3px solid white;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: border-color, outline-color 0.3s ease;
+
+}
+
+.input:focus{
+    border: 2px solid dodgerblue;
+    outline: 3px solid dodgerblue;
+    box-shadow: 0 0 5px dodgerblue;
+}
+
+
+.role{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+
+}
+
+.role input[type="radio"]{
+    display: none;
+}
+
+.role label{
+    display: inline-block;
+    background-color: #fff;
+    border: 2px solid dodgerblue;
+    color: dodgerblue;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+
+
+}
+
+.role label:last-child{
+    margin-right: 0px;
+}
+
+
+
+.role input[type="radio"]:checked + label{
+    background-color: dodgerblue;
+    color: #fff;
+}
+
+.btn{
+    color: white;
+    background-color: dodgerblue;
+    border-color: dodgerblue;
+    outline: none;
+}
+
+.btn:hover{
+    background-color: #0d80ee;
+    border-color: #0d80ee;
+    box-shadow: none;
+    outline: none;
+
+}
+
+.btn:focus{
+    box-shadow: none;
+    outline: none;
+}
+
+.smaller-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.delete-btn{
+    position: relative;
+    top: 4px;
+    text-align: center;
+    background: red;
+    width: 48px;
+    height: 48px;
+    border: 0px solid red;
+    outline: none;
+    padding: 0px;
+    border-radius: 5px;
+    font-size: 30px;
+    margin-left: 10px;
+
+}
+
+.delete-btn:hover{
+    border-color: #d8000c;
+    background-color: #d8000c;
+}
+
+#answers{
+    width: 85%;
+}
+
+.questions{
+    width: 90%;
+    margin: 20px auto;
+}
+
+#add-question-btn{
+    width: 95%;
+    margin: auto;
+
+}
+
+.question-text-and-btn{
+    margin-bottom: 10px;
+}
+
+.ans{
+    margin: 0px;
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+
+.input-small{
+    width: 70%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    outline: 2px solid white;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color, outline-color 0.3s ease;
+
+}
+
+.input-small:focus{
+    border: 1px solid dodgerblue;
+    outline: 2px solid dodgerblue;
+    box-shadow: 0 0 5px dodgerblue;
+}
+
+.delete-btn-small{
+    position: relative;
+    top: 4px;
+    text-align: center;
+    background: red;
+    width: 38px;
+    height: 38px;
+    border: 0px solid red;
+    outline: none;
+    padding: 0px;
+    border-radius: 5px;
+    font-size: 25px;
+    margin-left: 10px;
+
+}
+
+input[type=radio]:checked{
+    background: red !important;
+}
+
+.delete-btn-small:hover{
+    border-color: #d8000c;
+    background-color: #d8000c;
+}
+
+.dot{
+    min-width: 8px;
+    height: 8px;
+    border: 2px solid black;
+    margin: 0 3px;
+    border-radius: 50%;
+    display: block-inline;
+    float: left;
+}
+
+.black{
+     background-color: black;
+}
+
+.display-answer{
+    display: flex;
+    align-items: center;
+}

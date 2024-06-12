@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Zarejestruj się{% endblock %}
+
+{% block content %}
+    <header>Zarejestruj się</header>
+    <form method="POST">
+        <div class="items-group">
+            <div class="item">
+                <label for="first-name">Imię</label>
+                <input type="text" id="first-name" class="input" name="first-name" placeholder="Podaj imię" value="{{ values['first-name'] if values['first-name'] else '' }}">
+            </div>
+            <div class="item">
+                <label for="last-name">Nazwisko</label>
+                <input type="text" id="last-name" class="input" name="last-name" placeholder="Podaj nazwisko" value="{{ values['last-name'] if values['last-name'] else '' }}">
+            </div>
+            <div class="item">
+                <label for="email">Email</label>
+                <input type="text" id="email" class="input" name="email" placeholder="Podaj adres email" value="{{ values['email'] if values['email'] else '' }}">
+            </div>
+            <div class="item">
+                <label for="password1">Hasło</label>
+                <input type="password" id="password1" class="input" name="password1" placeholder="Podaj hasło">
+            </div>
+            <div class="item">
+                <label for="password2">Potwierdź hasło</label>
+                <input type="password" id="password2" class="input" name="password2" placeholder="Potwierdź hasło">
+            </div>
+            <div class="item">
+                <label for="role">Kim jesteś?</label>
+                <span class="role" id="role">
+                <input type="radio" id="student" name="role" value="student">
+                <label for="student">Uczeniem</label>
+                <input type="radio" id="teacher" name="role" value="teacher">
+                <label for="teacher">Nauczycielem</label>
+                </span>
+            </div>
+            <div class="item">
+                <input type="submit" class="input btn" value="Zarejestruj">
+            </div>
+        </div>
+
+    </form>
+
+
+{% endblock %}

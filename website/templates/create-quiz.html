@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Stwórz quiz{% endblock %}
+
+{% block content %}
+    <header>Stwórz quiz</header>
+    <form method="post">
+        <div class="items-group">
+            <input type="hidden" name="question-counter" id="question-counter" value=0>
+            <div class="item">
+                <input type="text" id="title" name="title" class="input" placeholder="Podaj tytuł quizu">
+            </div>
+            <div class="item">
+                <textarea name="description" id="description" class="input" placeholder="Podaj opis quizu (opcjonalnie)" rows="2"></textarea>
+            </div>
+            <div class="item">
+                <div class="questions" style="background-color: white" id="questions">
+
+                </div>
+            </div>
+            <div class="item smaller-div">
+                <button type="button" class="input btn" id="add-question-btn">Dodaj pytanie</button>
+            </div>
+            <div class="item">
+                <button type="submit" class="input btn">Stwórz quiz</button>
+            </div>
+
+        </div>
+    </form>
+    <script src="{{ url_for('static', filename='create_quiz.js') }}"></script>
+
+    {%if quiz%}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quizData = JSON.parse('{{ quiz | tojson | safe }}');
+            remakeQuiz(quizData);
+        });
+    </script>
+    {% endif%}
+{% endblock %}

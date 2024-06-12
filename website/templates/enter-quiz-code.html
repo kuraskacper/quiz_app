@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Rozpocznij quiz{% endblock %}
+
+{% block content %}
+    <header>Rozpocznij quiz</header>
+    <form action="take-quiz" method="POST">
+        <div class="items-group">
+            <div class="item">
+                <label for="access-code">Kod dostępu do quizu</label>
+                <input type="text" id="access-code" class="input" name="access-code" placeholder="Podaj kod dostępu do quizu">
+                <input type="submit" class="input btn" value="Rozpocznij quiz">
+            </div>
+        </div>
+    </form>
+{% endblock %}

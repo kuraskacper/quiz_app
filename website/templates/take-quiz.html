@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='take-quiz.css') }}">
+{% endblock %}
+
+{% block title %}Robienie quizu{% endblock %}
+
+
+{% block content %}
+    <header>{{ quiz.title }}</header>
+    <form action="/submit-quiz" method="POST">
+        <input type="hidden" name="quiz-id" value="{{ quiz.id }}">
+        <input type="hidden" name="result-id" value="{{ result_id }}">
+        <div class="items-group quiz">
+            {% for question in quiz.questions %}
+                {% set question_number = loop.index %}
+                <div class="item">
+                    <p class="question">{{ question.text }}</p>
+                    <input type="radio" name="{{question_number}}" checked value="0" style="display: none;">
+                    <ol style="list-style-type: none;">
+                        {% for answer in question.answers %}
+                            {% set answer_number = loop.index %}
+                            <li class="answer">
+                                <input type="radio" id="question-{{question_number}}-answer{{answer_number}}" name="{{question_number}}" onchange="highlightSelectedAnswer(this)" value="{{ answer_number }}">
+                                <label for="question-{{question_number}}-answer{{answer_number}}">{{ answer.text }}</label>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            {% endfor %}
+            <div class="item">
+                <input type="submit" class="input btn" value="Zakończ quiz">
+            </div>
+        </div>
+
+    </form>
+
+     <script src="{{ url_for('static', filename='take-quiz.js') }}"></script>
+
+{% endblock %}

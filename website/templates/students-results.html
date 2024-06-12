@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+{% endblock %}
+
+{% block title %}Wyniki uczniów{% endblock %}
+
+{% block content %}
+    <header>Wyniki uczniów</header>
+    {% for quiz in quizzes %}
+        <div class="result-container item" onclick="toggleResultDetails('result{{ quiz.id }}')">
+            <div class="result-header">
+                <h2 class="result-title">{{ quiz.title }}</h2>
+                <p class="result-description"> {{ quiz.description }}</p>
+            </div>
+            <div class="result-details" id="result{{ quiz.id }}" onclick="event.stopPropagation()">
+                {% for result in results[quiz.id] | reverse %}
+                    {% if result.score_percentage <= 30 %}
+                        {% set color = 'red' %}
+                    {% elif 30 < result.score_percentage <= 50 %}
+                        {% set color = '#FF5F1F' %}
+                    {% elif 50 < result.score_percentage <= 80 %}
+                        {% set color = 'gold' %}
+                    {% else %}
+                        {% set color = 'lime' %}
+                    {% endif %}
+                    <div class="answer-container" onclick="toggleAnswerDetails('{{ quiz.id }}answer{{ result.id }}', '{{ color }}')">
+                        <div class="answer-header">
+                            <p>
+                                {{ result.user.first_name }} {{ result.user.last_name }}
+                                <span style="float: right; color: {{ color }};">{{ result.correct_answers }}/{{ result.all_answers }}  {{ result.score_percentage }}%</span>
+                            </p>
+                        </div>
+                        <div class="answer-details"  id="{{ quiz.id }}answer{{ result.id }}" onclick="event.stopPropagation()">
+                            <b>Data Rozpoczęcia: </b>{{ result.started_at }}<br>
+                            <b>Data Zakończenia: </b> {{ result.completed_at }}<br>
+                            <b>Email: </b> {{ result.user.email }}<br>
+                            <b>Poprawne odpowiedz: </b> {{ result.correct_answers }}<br>
+                            <b>Wynik: </b> {{ result.score_percentage }}%<br>
+                            <br><hr><br>
+                            <ul>
+                                {% for user_answer in result.user_answers %}
+                                    <li>
+                                        {% if user_answer.is_correct %}
+                                            <div class="student-answer correct-answer">
+                                                <p style="text-align: center"><b> Pytanie {{ loop.index }}: {{ user_answer.question.text }}</b></p>
+                                                <p><b>Odpowidź ucznia: </b>{{ user_answer.answer.text }}</p>
+                                                <p><b>Poprawna odpowidź: </b>{{ user_answer.question.get_correct_answer_text() }}</p>
+                                            </div>
+                                        {% elif user_answer.answer_id == None %}
+                                            <div class="student-answer wrong-answer">
+                                                <p style="text-align: center"><b> Pytanie {{ loop.index }}: {{ user_answer.question.text }}</b></p>
+                                                <p><b>Odpowidź ucznia: </b>Nie udzielił odpowiedzi</p>
+                                                <p><b>Poprawna odpowidź: </b>{{ user_answer.question.get_correct_answer_text() }}</p>
+                                            </div>
+                                        {% else %}
+                                            <div class="student-answer wrong-answer">
+                                                <p style="text-align: center"><b> Pytanie {{ loop.index }}: {{ user_answer.question.text }}</b></p>
+                                                <p><b>Odpowidź ucznia: </b>{{ user_answer.answer.text }}</p>
+                                                <p><b>Poprawna odpowidź: </b>{{ user_answer.question.get_correct_answer_text() }}</p>
+                                            </div>
+                                        {% endif %}
+
+<!--                                        <strong>Question:</strong> {{ user_answer.question.text }}<br>-->
+<!--                                        <strong>Your Answer:</strong> {{ user_answer.answer.text }}<br>-->
+<!--                                        <strong>Correct:</strong> {{ user_answer.is_correct }}-->
+
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+    <script src="{{ url_for('static', filename='results.js') }}"></script>
+
+{% endblock %}

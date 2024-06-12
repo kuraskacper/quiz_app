@@ -1,0 +1,31 @@
+.question{
+    font-size: 26px;
+    font-weight: bold;
+    padding: 10px 3px;
+}
+
+.answer{
+    padding-left: 20px;
+    display: flex;
+    border-radius: 5px;
+
+}
+
+.answer:hover{
+    background-color: #f1f1f1;
+}
+
+.answer + input[type=radio]{
+    background-color: yellow;
+}
+
+.answer label{
+    padding: 5px;
+    padding-left: 20px;
+}
+
+.answer input[type=radio]{
+    display: block;
+}
+
+.answer

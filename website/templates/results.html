@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+{% endblock %}
+
+{% block title %}Towje wyniki{% endblock %}
+
+{% block content %}
+    <header>Twoje wyniki</header>
+
+    {% for result in results%}
+        <div class="result-container item" onclick="toggleResultDetails('result{{ result.id }}')">
+            <div class="result-header">
+                <h2 class="result-title">{{ result.title }}<p style="text-align: right; color: {{ result.score_percentage_color }};">{{ result.correct_answer }}/{{ result.all_answer }}  {{ result.score }}%</p></h2>
+                <p class="result-description"> {{ result.description }} <br><br> Ukończono: {{ result.completed_at }} </p>
+            </div>
+            <div class="result-details" id="result{{ result.id }}" onclick="event.stopPropagation()">
+                {% for question in result.questions %}
+                    <div class="question">
+                        <p class="question-text">{{ question['text'] }}</p>
+                        <ol class="answers">
+                            {% for text, type in question['answers'].items() %}
+                                <li class="{{ type }} display-answer"> <div class="dot{% if question['check_answer'] == loop.index %} black {% endif %} "></div>  {{ text }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    {% endfor %}
+
+     <script src="{{ url_for('static', filename='results.js') }}"></script>
+
+{% endblock %}

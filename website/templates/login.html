@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Zaloguj się{% endblock %}
+
+{% block content %}
+    <header>Zaloguj się</header>
+    <form method="POST" action="login">
+        <div class="items-group">
+            <div class="item">
+                <label for="email">Email</label>
+                <input type="text" id="email" class="input" name="email" placeholder="Podaj adres email">
+            </div>
+            <div class="item">
+                <label for="password">Hasło</label>
+                <input type="password" id="password" class="input" name="password" placeholder="Podaj hasło">
+            </div>
+            <div class="item">
+                <input type="submit" class="input btn" value="Zaloguj">
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='quizzes.css') }}">
+{% endblock %}
+
+{% block title %}Twoje quizy{% endblock %}
+
+{% block content %}
+    <header>Twoje quizy</header>
+
+    {% for quiz in quizzes %}
+        <div class="quiz-container item" onclick="toggleQuizDetails('quiz{{ quiz.id }}')">
+            <div class="quiz-header">
+                <h2 class="quiz-title">{{ quiz.title }}</h2>
+                <p class="quiz-description">{{ quiz.description }}</p>
+            </div>
+            <div class="quiz-details" id="quiz{{ quiz.id }}" onclick="event.stopPropagation()">
+                {% for question in quiz.questions %}
+                    <div class="question">
+                        <p class="question-text">{{ question.text }}</p>
+                        <ol class="answers">
+                            {% for answer in question.answers %}
+                                <li class="{{ 'correct-answer' if answer.is_correct }} display-answer"><div class="dot {{ 'black' if answer.is_correct}}"></div>  {{ answer.text }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                {% endfor %}
+                <div class="access-code">
+                    <form action="./access-code" method="POST">
+                        <input type="hidden" name="quiz-id" value="{{ quiz.id }}">
+                        <input type="hidden" name="quiz-title" value="{{ quiz.title }}">
+                        <label for="access-code">Kod dostępu do quizu(będzie on aktywny przez 10min)</label>
+                        <input type="text" id="access-code" class="input item" name="access-code" placeholder="Podaj kod dostępu">
+                        <input type="submit" class="input btn " value="Rozpocznij quiz">
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+     <script src="{{ url_for('static', filename='quizzes.js') }}"></script>
+
+{% endblock %}

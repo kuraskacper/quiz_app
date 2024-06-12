@@ -1,0 +1,121 @@
+
+:root{
+    --main-width: 60%;
+}
+
+@media (max-width: 600px) {
+    :root {
+        --main-width: 85%;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    :root {
+        --main-width: 70%;
+    }
+}
+
+@media (min-width: 900px) {
+    :root {
+        --main-width: 50%;
+    }
+}
+
+
+.result-container {
+    width: var(--main-width);
+    border: 2px solid #ccc;
+    outline: 3px solid white;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.answer-container{
+    width: 95%;
+    border: 2px solid #ccc;
+    outline: 3px solid white;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.result-header, .answer-header {
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.answer-header {
+    font-size: 18px;
+}
+
+.result-header:hover, .answer-header:hover {
+    background-color: #f1f1f1;
+}
+
+.result-title {
+    margin: 0;
+}
+
+.result-description {
+    margin: 5px 0 0 0;
+    color: #666;
+}
+
+.result-details, .answer-details {
+    display: none;
+    padding: 15px;
+}
+
+.question {
+    margin-bottom: 15px;
+}
+
+.question-text {
+    font-weight: bold;
+}
+
+.answers {
+    list-style-type: none;
+    padding: 0;
+}
+
+.answers li {
+    border-radius: 5px;
+    margin: 2px 0;
+    padding: 5px;
+    margin-left: 30px;
+}
+
+.neutral{
+    background-color: white;
+}
+
+.correct{
+    background-color: #aaff80;
+}
+
+.wrong{
+    background-color: #ff8080;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.student-answer {
+    border-radius: 5px;
+    padding: 10px 10px;
+    margin: 5px 0;
+    line-height: 30px;
+}
+
+.correct-answer {
+    background-color: #aaff80;
+}
+
+.wrong-answer {
+    background-color: #ff8080;
+}
